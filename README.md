@@ -1,24 +1,56 @@
-# README
+# テーブル設計
+## users テーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+|Column    |Type    |Options        |
+|----------|--------|---------------|
+| name     | string | null: false   |
+| email    | string | null: false   |
+| password | string | unique: false |
+### Association
 
-Things you may want to cover:
+has_many :goods
+has_many :buys
 
-* Ruby version
+## goods テーブル
 
-* System dependencies
+|Column         |Type         |Options                        |
+|---------------|-------------|-------------------------------|
+| goods_name    | string      | null: false                   |
+| explanation   | text        | null: false                   |
+| category      | string      | null: false                   |
+| status        | text        | null: false                   |
+| delivery_fee  | integer     | null: false                   |
+| area          | string      | null: false                   |
+| days          | string      | null: false                   |
+| price         | string      | null: false                   |
+| seller        | string      | null: false                   |
+| user          | references  | null: false,foreign_key: true |
+### Association
 
-* Configuration
+belongs_to :users
+belongs_to :buys
 
-* Database creation
+## buys テーブル
 
-* Database initialization
+|Column         |Type         |Options                        |
+|---------------|-------------|-------------------------------|
+| buyer         | string      | null: false                   |
+| user          | references  | null: false,foreign_key: true |
+### Association
 
-* How to run the test suite
+has_many :address
+has_one  :goods
 
-* Services (job queues, cache servers, search engines, etc.)
+## address テーブル
 
-* Deployment instructions
+|Column         |Type         |Options                       |
+|---------------|-------------|------------------------------|
+| postal        | string      | null: false                  |
+| prefectures   | string      | null: false                  |
+| municipality  | string      | null: false                  |
+| house_number  | string      | null: false                  |
+| phone_number  | integer     | null: false                  |
+| buy           | references  | null: false,foreign_key: true|
+### Association
 
-* ...
+belongs_to :buys
