@@ -4,13 +4,13 @@
 |Column              |Type    |Options                    |
 |--------------------|--------|---------------------------|
 | nickname           | string | null: false               |
-| email              | string | unique: false,null: false |
-| encrypted_password | string | unique: false,null: false |
+| email              | string | unique: true,null: false  |
+| encrypted_password | string | unique: true,null: false  |
 | last_name          | string | null: false               |
 | first_name         | string | null: false               |
 | last_name_katakana | string | null: false               |
 | first_name_katakana| string | null: false               |
-| birthday           | integer| null: false               |
+| birthday           | date   | null: false               |
 
 ### Association
 
@@ -44,19 +44,21 @@ has_one :buy
 ### Association
 
 has_one :address
-belongs_to  :goods
-has_one :user
+belongs_to  :good
+belongs_to :user
 
 ## address テーブル
 
 |Column          |Type         |Options                       |
 |----------------|-------------|------------------------------|
+| prefectures    | integer     | null: false                  |
 | postal         | string      | null: false                  |
 | municipality   | string      | null: false                  |
 | house_number   | string      | null: false                  |
 | phone_number   | string      | null: false                  |
 | building_number| string      |                              |
 | buy            | references  | null: false,foreign_key: true|
+| area_id        | integer     | null: false
 ### Association
 
-belongs_to :buys
+belongs_to :buy
