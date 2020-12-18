@@ -5,7 +5,7 @@
 |--------------------|--------|---------------------------|
 | nickname           | string | null: false               |
 | email              | string | unique: true,null: false  |
-| encrypted_password | string | unique: true,null: false  |
+| encrypted_password | string | null: false  　　　　　　　　|
 | last_name          | string | null: false               |
 | first_name         | string | null: false               |
 | last_name_katakana | string | null: false               |
@@ -51,7 +51,6 @@ belongs_to :user
 
 |Column          |Type         |Options                       |
 |----------------|-------------|------------------------------|
-| prefectures    | integer     | null: false                  |
 | postal         | string      | null: false                  |
 | municipality   | string      | null: false                  |
 | house_number   | string      | null: false                  |
