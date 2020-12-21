@@ -11,6 +11,13 @@
 </head>
 
 <body>
+<header class="header">
+  <% if user_signed_in? %>
+  <%= link_to 'ログアウト',destroy_user_session_path , method: :delete, class: "logout" %>
+  <% else %>
+  <%= link_to 'ログイン', new_user_session_path, class: "login" %>
+  <% end %>
+</header>
   <%= yield %>
 </body>
 
