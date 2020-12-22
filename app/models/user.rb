@@ -3,13 +3,21 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
-  validates :nickname, presence: true
-  validates :email, presence: true
-  validates :encrypted_password, presence: true
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :first_name_katakana, presence: true
-  validates :last_name_katakana, presence: true
-  validates :birthday, presence: true
+
+  with_options presence: true do
+    validates :nickname
+    validates :email
+    validates :encrypted_password
+    validates :birthday
+  end
+
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/} do
+    validates :first_name
+    validates :last_name
+    validates :first_name_katakana
+    validates :last_name_katakana
+  end
+
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'には半角数字と半角英字の両方を含めて設定してください'
 end
